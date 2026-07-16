@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.8)
+project(bus_diagnostics)
+set(CMAKE_CXX_STANDARD 17)
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(diagnostic_msgs REQUIRED)
+
+add_executable(diag_aggregator src/diag_aggregator.cpp)
+ament_target_dependencies(diag_aggregator rclcpp diagnostic_msgs)
+install(TARGETS diag_aggregator DESTINATION lib/${PROJECT_NAME})
+ament_package()

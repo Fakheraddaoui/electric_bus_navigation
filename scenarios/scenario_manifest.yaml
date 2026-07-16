@@ -1,0 +1,13 @@
+# Regression scenario suite — run by CI on every commit (100+ in full set).
+# Each entry maps to a recorded/parameterized simulation run.
+scenarios:
+  - {id: 001, name: pedestrian_jaywalking_near,   expect: YIELD_PEDESTRIAN}
+  - {id: 002, name: pedestrian_jaywalking_far,    expect: CRUISE}
+  - {id: 003, name: light_green_to_yellow_early,  expect: STOP_FOR_LIGHT}
+  - {id: 004, name: light_green_to_yellow_late,   expect: CRUISE}
+  - {id: 005, name: light_red_hold_at_line,       expect: HOLD}
+  - {id: 006, name: cut_in_vehicle_close,         expect: EMERGENCY_STOP}
+  - {id: 007, name: cut_in_vehicle_with_gap,      expect: FOLLOW}
+  - {id: 008, name: slow_lead_vehicle,            expect: FOLLOW}
+  - {id: 009, name: pedestrian_and_red_light,     expect: YIELD_PEDESTRIAN}
+  - {id: 010, name: debris_in_lane,               expect: EMERGENCY_STOP}

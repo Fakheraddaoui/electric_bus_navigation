@@ -1,0 +1,38 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  primary-firmware:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with: { ruby-version: '3.2' }
+      - run: gem install ceedling
+      - run: cd firmware/primary && ceedling test:all
+  safety-monitor-firmware:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with: { ruby-version: '3.2' }
+      - run: gem install ceedling
+      - run: cd firmware/safety_monitor && ceedling test:all
+  ros2:
+    runs-on: ubuntu-latest
+    container: ros:humble
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          cd ros2_ws
+          . /opt/ros/humble/setup.sh
+          colcon build && colcon test && colcon test-result --verbose
+  scenario-regression:
+    runs-on: ubuntu-latest
+    container: ros:humble
+    needs: [ros2, primary-firmware, safety-monitor-firmware]
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          . /opt/ros/humble/setup.sh
+          cd ros2_ws && colcon build && . install/setup.sh && cd ..
+          python3 scripts/run_scenarios.py scenarios/scenario_manifest.yaml
