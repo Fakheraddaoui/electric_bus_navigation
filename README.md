@@ -30,7 +30,9 @@ scenarios/                100+ urban scenario definitions for regression CI
 
 ## Tests
 ```bash
-cd firmware/primary && ceedling test:all
-cd firmware/safety_monitor && ceedling test:all
+make -C firmware/primary test
+make -C firmware/safety_monitor test
 cd ros2_ws && colcon build && colcon test
 ```
+
+> Firmware unit tests run with a vendored [Unity](https://github.com/ThrowTheSwitch/Unity) harness (`make test`) — no Ruby/Ceedling required. A legacy `project.yml` is kept for teams using Ceedling 0.31.x locally.

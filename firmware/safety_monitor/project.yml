@@ -1,14 +1,28 @@
 ---
+# Ceedling 1.x project configuration
 :project:
-  :use_exceptions: FALSE
-  :use_test_preprocessor: TRUE
   :build_root: build
   :test_file_prefix: test_
+  :use_mocks: FALSE
+  :use_test_preprocessor: :none
+  :use_backtrace: :none
+
 :paths:
-  :test: [ +:test/** ]
-  :source: [ src/** ]
-  :include: [ include/** ]
+  :test:
+    - +:test/**
+  :source:
+    - src/**
+  :include:
+    - include/**
+
 :defines:
-  :test: [ UNIT_TEST ]
+  :test:
+    - UNIT_TEST
+
+:libraries:
+  :system:
+    - m
+
 :plugins:
-  :enabled: [ stdout_pretty_tests_report, gcov ]
+  :enabled:
+    - report_tests_pretty_stdout
