@@ -36,3 +36,5 @@ cd ros2_ws && colcon build && colcon test
 ```
 
 > Firmware unit tests run with a vendored [Unity](https://github.com/ThrowTheSwitch/Unity) harness (`make test`) — no Ruby/Ceedling required. A legacy `project.yml` is kept for teams using Ceedling 0.31.x locally.
+
+See [docs/TEST_CASES.md](docs/TEST_CASES.md) for seven documented test cases with concrete inputs, expected values, and measured results.
